@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UploadFree</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .sidebar {
+            height: 100vh;
+            width: 80px;
+            position: fixed;
+            background-color: #1f1f1f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .sidebar .logo {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .sidebar .nav-link {
+            color: #ffffff;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .sidebar .nav-link:hover {
+            color: #00ff88;
+        }
+        .nav-link-icon {
+            font-size: 24px;
+        }
+        .nav-tooltip {
+            position: absolute;
+            left: 90px;
+            background-color: #333333;
+            padding: 5px 10px;
+            border-radius: 5px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s;
+        }
+        .nav-link:hover .nav-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        .avatar {
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+        .avatar img {
+            border-radius: 50%;
+        }
+        .card {
+            background-color: #1f1f1f;
+            border: none;
+            border-radius: 10px;
+            padding: 20px;
+            color: white;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .card h5 {
+            margin-bottom: 15px;
+        }
+        .card .value {
+            font-size: 28px;
+            color: #00ff88;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">UF</div>
+        <a href="#" class="nav-link">
+            <span class="nav-link-icon">🏠</span>
+            <span class="nav-tooltip">Home</span>
+        </a>
+        <a href="#" class="nav-link">
+            <span class="nav-link-icon">📁</span>
+            <span class="nav-tooltip">Files</span>
+        </a>
+        <a href="#" class="nav-link">
+            <span class="nav-link-icon">🛒</span>
+            <span class="nav-tooltip">Store</span>
+        </a>
+        <a href="#" class="nav-link">
+            <span class="nav-link-icon">💰</span>
+            <span class="nav-tooltip">Earn</span>
+        </a>
+        <a href="#" class="nav-link">
+            <span class="nav-link-icon">⚙️</span>
+            <span class="nav-tooltip">Settings</span>
+        </a>
+        <div class="avatar">
+            <img src="https://via.placeholder.com/50" alt="Avatar">
+        </div>
+    </div>
+    <div class="container" style="margin-left: 100px; padding: 20px;">
+        <h2>Dashboard</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <h5>Balance</h5>
+                    <div class="value">$250.00</div>
+                    <button class="btn btn-success">Add Funds</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <h5>Limit</h5>
+                    <div class="value">0MB/300MB</div>
+                    <button class="btn btn-warning">Get more storage</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <h5>Files</h5>
+                    <div class="value">24</div>
+                    <button class="btn btn-primary">Create more</button>
+                </div>
+            </div>
+        </div>
+        <h3>Recent Invoices</h3>
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Invoice #</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>INV-001</td>
+                    <td>June 1, 2023</td>
+                    <td>$75.00</td>
+                    <td><span class="text-success">Paid</span></td>
+                    <td><button class="btn btn-info">View</button></td>
+                </tr>
+                <tr>
+                    <td>INV-002</td>
+                    <td>May 1, 2023</td>
+                    <td>$75.00</td>
+                    <td><span class="text-success">Paid</span></td>
+                    <td><button class="btn btn-info">View</button></td>
+                </tr>
+                <tr>
+                    <td>INV-003</td>
+                    <td>April 1, 2023</td>
+                    <td>$75.00</td>
+                    <td><span class="text-success">Paid</span></td>
+                    <td><button class="btn btn-info">View</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
