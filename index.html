@@ -72,6 +72,28 @@
             font-size: 28px;
             color: #00ff88;
         }
+        .file-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2a2a2a;
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            margin-bottom: 15px;
+        }
+        .file-name {
+            font-size: 18px;
+        }
+        .file-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-content {
+            background-color: #333333;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -126,43 +148,122 @@
                 </div>
             </div>
         </div>
-        <h3>Recent Invoices</h3>
-        <table class="table table-dark table-hover">
-            <thead>
-                <tr>
-                    <th>Invoice #</th>
-                    <th>Date</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>INV-001</td>
-                    <td>June 1, 2023</td>
-                    <td>$75.00</td>
-                    <td><span class="text-success">Paid</span></td>
-                    <td><button class="btn btn-info">View</button></td>
-                </tr>
-                <tr>
-                    <td>INV-002</td>
-                    <td>May 1, 2023</td>
-                    <td>$75.00</td>
-                    <td><span class="text-success">Paid</span></td>
-                    <td><button class="btn btn-info">View</button></td>
-                </tr>
-                <tr>
-                    <td>INV-003</td>
-                    <td>April 1, 2023</td>
-                    <td>$75.00</td>
-                    <td><span class="text-success">Paid</span></td>
-                    <td><button class="btn btn-info">View</button></td>
-                </tr>
-            </tbody>
-        </table>
+        <h3>Files</h3>
+        <div class="content">
+            <div class="file-card">
+                <div class="file-name">File 1</div>
+                <div class="file-options">
+                    <button class="btn btn-primary" onclick="viewFile('File 1')">View</button>
+                    <button class="btn btn-warning" onclick="renameFile('File 1')">Rename</button>
+                    <button class="btn btn-danger" onclick="deleteFile('File 1')">Delete</button>
+                </div>
+            </div>
+            <div class="file-card">
+                <div class="file-name">File 2</div>
+                <div class="file-options">
+                    <button class="btn btn-primary" onclick="viewFile('File 2')">View</button>
+                    <button class="btn btn-warning" onclick="renameFile('File 2')">Rename</button>
+                    <button class="btn btn-danger" onclick="deleteFile('File 2')">Delete</button>
+                </div>
+            </div>
+            <div class="file-card">
+                <div class="file-name">File 3</div>
+                <div class="file-options">
+                    <button class="btn btn-primary" onclick="viewFile('File 3')">View</button>
+                    <button class="btn btn-warning" onclick="renameFile('File 3')">Rename</button>
+                    <button class="btn btn-danger" onclick="deleteFile('File 3')">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="fileModal" tabindex="-1" aria-labelledby="fileModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="fileModalLabel">File Information</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p><strong>Name:</strong> <span id="fileName"></span></p>
+            <p><strong>Creation Date:</strong> <span id="fileCreation"></span></p>
+            <p><strong>Last Modified:</strong> <span id="fileModified"></span></p>
+            <p><strong>Size:</strong> <span id="fileSize"></span></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="renameModal" tabindex="-1" aria-labelledby="renameModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="renameModalLabel">Rename File</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <input type="text" id="newFileName" class="form-control" placeholder="Enter new file name">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="confirmRename()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Delete File</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete <span id="deleteFileName"></span>?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function viewFile(fileName) {
+            document.getElementById('fileName').innerText = fileName;
+            document.getElementById('fileCreation').innerText = '2024-01-01';
+            document.getElementById('fileModified').innerText = '2024-01-02';
+            document.getElementById('fileSize').innerText = '2MB';
+            var fileModal = new bootstrap.Modal(document.getElementById('fileModal'));
+            fileModal.show();
+        }
+
+        function renameFile(fileName) {
+            document.getElementById('newFileName').value = fileName;
+            var renameModal = new bootstrap.Modal(document.getElementById('renameModal'));
+            renameModal.show();
+        }
+
+        function confirmRename() {
+            var newFileName = document.getElementById('newFileName').value;
+            alert('File renamed to: ' + newFileName);
+        }
+
+        function deleteFile(fileName) {
+            document.getElementById('deleteFileName').innerText = fileName;
+            var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            deleteModal.show();
+        }
+
+        function confirmDelete() {
+            alert('File deleted');
+        }
+    </script>
 </body>
 </html>
